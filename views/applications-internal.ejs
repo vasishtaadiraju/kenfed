@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Applications Pending | KENFED</title>
+    <meta content="Edit user example" name="description" />
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+    <!--begin::Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" />
+    <!--end::Fonts-->
+    <!--begin::Page Custom Styles(used by this page)-->
+    <link href="css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Custom Styles-->
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <link href="css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
+    <link href="css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
+    <link href="css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+    <link href="css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+    <!--end::Layout Themes-->
+    <link href="media/logos/favicon.ico" rel="shortcut icon" />
+    <script type="text/javascript">
+        function display_ct() {
+            var x = new Date();
+            var x1 = x.getMonth() + 1 + "/" + x.getDate() + "/" + x.getFullYear();
+            x1 =
+                x1 +
+                " - " +
+                x.getHours() +
+                ":" +
+                x.getMinutes() +
+                ":" +
+                x.getSeconds();
+            document.getElementById("ct").innerHTML = x1;
+            display_c();
+        }
+    </script>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body
+    class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"
+    id="kt_body" onload="display_ct();">
+    <!--begin::Main-->
+    <!--begin::Header Mobile-->
+    <div class="header-mobile align-items-center header-mobile-fixed" id="kt_header_mobile">
+        <!--begin::Logo-->
+        <a href="/"><img alt="Logo" src="media/logos/logo-light.png" /></a>
+        <!--end::Logo-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+            <!--begin::Aside Mobile Toggle-->
+            <button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
+                <span></span>
+            </button>
+            <!--end::Aside Mobile Toggle-->
+            <!--begin::Header Menu Mobile Toggle-->
+            <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
+                <span></span>
+            </button>
+            <!--end::Header Menu Mobile Toggle-->
+            <!--begin::Topbar Mobile Toggle-->
+            <button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
+                <span class="svg-icon svg-icon-xl">
+                    <!--begin::Svg Icon | path:media/svg/icons/General/User.svg--><svg height="24px" version="1.1"
+                        viewbox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                            <path
+                                d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                            <path
+                                d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                fill="#000000" fill-rule="nonzero"></path>
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>
+            </button>
+            <!--end::Topbar Mobile Toggle-->
+        </div>
+        <!--end::Toolbar-->
+    </div>
+    <!--end::Header Mobile-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Page-->
+        <div class="d-flex flex-row flex-column-fluid page">
+            <!--begin::Aside-->
+            <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
+                <!--begin::Aside Menu-->
+                <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+                    <%- include('partials/nav') %>
+                </div>
+                <!--end::Aside Menu-->
+            </div>
+            <!--end::Aside-->
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+                <!--begin::Header-->
+                <div class="header header-fixed" id="kt_header">
+                    <!--begin::Container-->
+                    <div class="container-fluid d-flex align-items-stretch justify-content-between">
+                        <%- include('partials/header') %>
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Content-->
+                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                    <!--begin::Subheader-->
+                    <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+                        <div
+                            class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                            <!--begin::Details-->
+                            <div class="d-flex align-items-center flex-wrap mr-2">
+                                <!--begin::Title-->
+                                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
+                                    Application Review
+                                </h5>
+                                <!--end::Title-->
+                                <!--begin::Separator-->
+                                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200">
+                                </div>
+                                <!--end::Separator-->
+                                <!--begin::Search Form-->
+                                <div class="d-flex align-items-center" id="kt_subheader_search">
+                                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">KENFED</span>
+                                </div>
+                                <!--end::Search Form-->
+                            </div>
+                            <!--end::Details-->
+                        </div>
+                    </div>
+                    <!--end::Subheader-->
+                    <!--begin::Entry-->
+                    <div class="d-flex flex-column-fluid">
+                        <!--begin::Container-->
+                        <div class="container">
+                            <div class="card card-custom mb-12">
+                                <div class="card-body">
+                                    <!--begin::Form-->
+                                <form>
+                                    <div class="card-body">
+                                     <div class="form-group">
+                                      <label>Full Name<span class="text-danger">*</span></label>
+                                      <input type="text" class="form-control"  id="name" value=""/>
+                                     </div>
+                                    <div class="form-group">
+                                        <label>Surname</label>
+                                        <select class="form-control" id="surname" value="">
+                                            <option disabled="disabled" selected="true">
+                                                Select your Surname
+                                            </option>                                               
+                                        </select>
+                                    </div>
+                                     <div class="form-group mb-1">
+                                       <label for="exampleTextarea">Email<span class="text-danger">*</span></label>
+                                       <input type="text" class="form-control"  id="email" value=""/>
+                                     </div>
+                                     <br>
+                                     <div class="form-group mb-1">
+                                       <label for="exampleTextarea">Mobile Number<span class="text-danger">*</span></label>
+                                       <input type="text" class="form-control" id="mobileno" value=""/>
+                                     </div>
+                                     <br>
+                                     <div class="form-group mb-1">
+                                        <label for="exampleTextarea">Name Of The Organization<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  id="organisation" value=""/>
+                                      </div>
+                                      <br>
+                                     <div class="form-group mb-1">
+                                        <label for="exampleTextarea">Location Of Business<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="location" value=""/>
+                                     </div>
+                                      <br>
+                                      <div class="form-group mb-1">
+                                        <label for="exampleTextarea">MOA<span class="text-danger">*</span></label>
+                                        <br>
+                                        <a id="moa" href="#" target="_blank">Download_MOA.pdf</a>
+                                     </div>
+                                      <br>
+                                      <div class="form-group mb-1">
+                                        <label for="exampleTextarea">AOA<span class="text-danger">*</span></label>
+                                        <br>
+                                        <a id="aoa" href="#">Download_AOA.pdf</a> </div>
+                                      <br>
+                                      <div class="form-group mb-1">
+                                        <label for="exampleTextarea">Certificate Of Incorporation<span class="text-danger">*</span></label>
+                                        <br>
+                                        <a id="incorporation" href="#">Download_CertificateOfIncorporation.pdf</a> </div>
+                                      <br>
+                                      <div class="form-group mb-1">
+                                        <label for="exampleTextarea">PAN<span class="text-danger">*</span></label>
+                                        <br>
+                                        <a id="pan" href="#">Download_PAN.pdf</a></div>
+                                      <br>
+                                      <div class="form-group mb-1">
+                                        <label for="exampleTextarea">GST<span class="text-danger">*</span></label>
+                                        <br>
+                                        <a id="gst" href="#">Download_GST.pdf</a>
+                                    </div>
+                                      <br>
+                                    </div>
+                                    <div class="card-footer">
+                                     <button type="button" class="btn btn-primary mr-2" id="verifybtn" onclick="verifyMember()">Verify</button>
+                                     <button type="button" class="btn btn-primary" id="activatebtn" onclick="activateMember()">Activate</button>
+                                    </div>
+                                   </form>
+                                   <!--end::Form-->
+                                </div>
+                                <!--end::Entry-->
+                            </div>
+                        </div>
+                        <!--end::Container-->
+                    </div>
+                    <!--end::Entry-->
+                </div>
+                <!--end::Content-->
+                <%- include('partials/footer') %>
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::Main-->
+    <%- include('partials/userprofile') %>
+        <!--begin::Scrolltop-->
+        <div class="scrolltop" id="kt_scrolltop">
+            <span class="svg-icon">
+                <!--begin::Svg Icon | path:media/svg/icons/Navigation/Up-2.svg--><svg height="24px" version="1.1"
+                    viewbox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <rect fill="#000000" height="10" opacity="0.3" rx="1" width="2" x="11" y="10"></rect>
+                        <path
+                            d="M6.70710678,12.7071068 C6.31658249,13.0976311 5.68341751,13.0976311 5.29289322,12.7071068 C4.90236893,12.3165825 4.90236893,11.6834175 5.29289322,11.2928932 L11.2928932,5.29289322 C11.6714722,4.91431428 12.2810586,4.90106866 12.6757246,5.26284586 L18.6757246,10.7628459 C19.0828436,11.1360383 19.1103465,11.7686056 18.7371541,12.1757246 C18.3639617,12.5828436 17.7313944,12.6103465 17.3242754,12.2371541 L12.0300757,7.38413782 L6.70710678,12.7071068 Z"
+                            fill="#000000" fill-rule="nonzero"></path>
+                    </g>
+                </svg>
+                <!--end::Svg Icon-->
+            </span>
+        </div>
+        <!--end::Scrolltop-->
+
+        <script>
+            var KTAppSettings = {
+                breakpoints: {
+                    sm: 576,
+                    md: 768,
+                    lg: 992,
+                    xl: 1200,
+                    xxl: 1400,
+                },
+                colors: {
+                    theme: {
+                        base: {
+                            white: "#ffffff",
+                            primary: "#3699FF",
+                            secondary: "#E5EAEE",
+                            success: "#1BC5BD",
+                            info: "#8950FC",
+                            warning: "#FFA800",
+                            danger: "#F64E60",
+                            light: "#E4E6EF",
+                            dark: "#181C32",
+                        },
+                        light: {
+                            white: "#ffffff",
+                            primary: "#E1F0FF",
+                            secondary: "#EBEDF3",
+                            success: "#C9F7F5",
+                            info: "#EEE5FF",
+                            warning: "#FFF4DE",
+                            danger: "#FFE2E5",
+                            light: "#F3F6F9",
+                            dark: "#D6D6E0",
+                        },
+                        inverse: {
+                            white: "#ffffff",
+                            primary: "#ffffff",
+                            secondary: "#3F4254",
+                            success: "#ffffff",
+                            info: "#ffffff",
+                            warning: "#ffffff",
+                            danger: "#ffffff",
+                            light: "#464E5F",
+                            dark: "#ffffff",
+                        },
+                    },
+                    gray: {
+                        "gray-100": "#F3F6F9",
+                        "gray-200": "#EBEDF3",
+                        "gray-300": "#E4E6EF",
+                        "gray-400": "#D1D3E0",
+                        "gray-500": "#B5B5C3",
+                        "gray-600": "#7E8299",
+                        "gray-700": "#5E6278",
+                        "gray-800": "#3F4254",
+                        "gray-900": "#181C32",
+                    },
+                },
+                "font-family": "Poppins",
+            };
+        </script>
+        <!--end::Global Config-->
+        <!--begin::Global Theme Bundle(used by all pages)-->
+
+        <script src="plugins/global/plugins.bundle.js"></script>
+        <script src="plugins/custom/prismjs/prismjs.bundle.js"></script>
+        <script src="js/scripts.bundle.js"></script>
+        <!--end::Global Theme Bundle-->
+        <!--begin::Page Scripts(used by this page)-->
+
+        <script src="js/pages/custom/user/edit-user.js"></script>
+        <!--end::Page Scripts-->
+        <script>
+            function getProfileData(member)
+            {
+                console.log(member);
+                $("#username").text("Admin");
+                $("#userletter").text("A");
+                $("#verifybtn").hide();
+                $("#activatebtn").hide();
+                $.ajax({
+                    type: 'GET',
+                    dataType:"json",
+                    contentType: 'application/json',
+                    url: '/api/user/profile/'+member,
+                    success: function (data, status, xhr) {
+                        console.log('data: ', data);
+                        if(data.status=='success')
+                        {
+                            $("#name").val(data.username);
+                            $("#email").val(data.email);
+                            $("#mobileno").val(data.mobileno);
+                            $("#organisation").val(data.organisation);
+                            $("#location").val(data.location);
+                            $("#moa").attr("href", data.moa);
+                            $("#aoa").attr("href", data.aoa);
+                            $("#incorporation").attr("href", data.incorporation);
+                            $("#pan").attr("href", data.pan);
+                            $("#gst").attr("href", data.gst);
+
+                            if(data.userstatus=='SUBMITTED')
+                            {
+                                $("#verifybtn").show();
+                            }
+                            if(data.userstatus=='VERIFIED')
+                            {
+                                $("#activatebtn").show();
+                            }
+                            $("#surname").val(data.surname);
+                            $('#surname').prop('disabled', true);
+                            getSurnames();
+
+                        }					
+                    },
+                    error(){
+                        console.log('Error');
+                    }
+                });
+            }
+            function verifyMember()
+            {
+                var params = (new URL(location)).searchParams;
+                var id = params.get("id");
+                var member = params.get("member");
+                console.log("verify member "+member+" : "+id);
+                var postdata={"member":member,"status":"VERIFIED"};
+            
+                $.ajax({
+                type: 'POST',
+                data: JSON.stringify(postdata),
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '/api/user/profile/status/update',
+                success: function (data, status, xhr) {
+                    console.log('data: ', data);
+                    if(data.status=='success')
+                    {
+                    swal.fire({
+                        text: "Member verified successfully.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    }).then(function() {
+                        location.replace("/applications?id="+id);
+                    });
+                    }
+                    else
+                    {
+                    swal.fire({
+                        text: "Something went wrong.Please try again later",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    });
+                    }
+                    
+                },
+                error(){
+                    console.log('Error');
+                }
+                });
+
+            }
+            function activateMember()
+            {
+                var params = (new URL(location)).searchParams;
+                var id = params.get("id");
+                var member = params.get("member");
+                console.log("activate member "+member+" : "+id);
+                var postdata={"member":member,"status":"ACTIVE"};
+            
+                $.ajax({
+                type: 'POST',
+                data: JSON.stringify(postdata),
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '/api/user/profile/status/update',
+                success: function (data, status, xhr) {
+                    console.log('data: ', data);
+                    if(data.status=='success')
+                    {
+                    swal.fire({
+                        text: "Member activated successfully.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    }).then(function() {
+                        location.replace("/applications?id="+id);
+                    });
+                    }
+                    else
+                    {
+                    swal.fire({
+                        text: "Something went wrong.Please try again later",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    });
+                    }
+                    
+                },
+                error(){
+                    console.log('Error');
+                }
+                });
+
+            }
+            function getSurnames()
+            {	
+                console.log("get surnames");
+                $.ajax({
+                type: 'GET',
+                dataType:"json",
+                contentType: 'application/json',
+                url: '/api/surname/list',
+                success: function (data, status, xhr) {
+                    console.log('data: ', data);
+                    if(data.status=='success')
+                    {     
+                    for(var i=0;i<data.list.length;i++)
+                    {
+                        console.log(data.list[i]);                   
+                        $("#surname").append(new Option(data.list[i].name+"("+data.list[i].gothram+")",data.list[i].id));
+                    }
+                    }					
+                },
+                error(){
+                    console.log('Error');
+                }
+                });
+
+
+            }
+            $(document).ready(function() {
+              console.log( "ready!" );
+              var params = (new URL(location)).searchParams;
+              var id = params.get("id");
+              var member = params.get("member");
+              $("#username").text("Admin");
+              $("#userletter").text("A");
+              $.ajax({
+                type: 'GET',
+                dataType:"json",
+                contentType: 'application/json',
+                url: '/api/user/'+id,
+                success: function (data, status, xhr) {
+                  console.log('data: ', data);
+                  if(data.status=='success')
+                  {
+                    if(data.role!='admin')
+                    {
+                      swal.fire({
+                        text: "You are unauthorized to view this page.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                          confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                      }).then(function() {
+                        location.replace("login");
+                      });
+                    }
+                    else
+                    {
+                        getProfileData(member);
+                    }
+  
+                  }					
+                },
+                error(){
+                  console.log('Error');
+                }
+              });
+              
+          });
+          </script>
+        <!--end::Body-->
+</body>
+</html>
