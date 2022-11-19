@@ -42,6 +42,34 @@ const profileupload = multer({
     ]
 );
 
+const cataloguestorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'C:/Users/Flash/Downloads/kenfeduploads')
+    },
+    filename:(req,file,cb)=>{
+        cb(null, req.body.orgid+"_"+file.fieldname+"_"+Date.now());
+    }
+});
+
+const catalogueupload = multer({
+    storage: cataloguestorage,
+    limits: {
+        fileSize: 1024 * 1024 * 10
+    },
+    fileFilter: (req, file, cb) => {
+        checkCatalogueFileType(file, cb);
+    }
+}).fields(
+    [
+        {
+            name:'pictures', maxCount:10
+        },
+        {
+            name: 'brochure', maxCount:1
+        }
+    ]
+);
+
 function checkFileType(file, cb) {
     if (
         file.mimetype === 'application/pdf'
@@ -52,30 +80,22 @@ function checkFileType(file, cb) {
           cb(null, false); // else fails
           console.log("pdf false");
       }
-    // if (file.fieldname === "certificate") {
-    //     if (
-    //         file.mimetype === 'application/pdf' ||
-    //         file.mimetype === 'application/msword' ||
-    //         file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    //       ) { // check file type to be pdf, doc, or docx
-    //           cb(null, true);
-    //       } else {
-    //           cb(null, false); // else fails
-    //       }
-    // }
-    // else if (file.fieldname === "natid" || file.fieldname === "profile") {
-    //     if (
-    //         file.mimetype === 'image/png' ||
-    //         file.mimetype === 'image/jpg' ||
-    //         file.mimetype === 'image/jpeg'||
-    //         fiel.mimetype==='image/gif'
-    //       ) { // check file type to be png, jpeg, or jpg
-    //         cb(null, true);
-    //       } else {
-    //         cb(null, false); // else fails
-    //       }
-    // }
+    
 }
+function checkCatalogueFileType(file, cb,page) {
+    if (
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/jpeg'
+      ) { // check file type to be png, jpeg, or jpg
+        cb(null, true);
+        console.log("image true");
+      } else {
+        cb(null, false); // else fails
+        console.log("image false");
+      }
+}
+
 router.post('/user/create',function(req,res,next){
     console.log("registration post test");
     console.log(req.body);
@@ -186,9 +206,9 @@ router.get('/user/:id', (req, res, next)=>{
 
             if(result.rows.length>0)
             {
-
-                console.log(result.rows[0].name);
-                return res.json({"status":"success","username":result.rows[0].name,"role":result.rows[0].role});
+                
+                console.log(result.rows[0]);
+                return res.json({"status":"success","username":result.rows[0].name,"role":result.rows[0].role,"email":result.rows[0].email});
             }
             else
             {
@@ -230,7 +250,7 @@ router.get('/user/profile/list', (req, res, next)=>{
 router.get('/user/profile/:id', (req, res, next)=>{
     console.log(req.params);
     console.log("get user profile data for "+req.params.id);
-    let selectQuery=`Select p.firstname as username,p.surname,p.email,p.mobileno,p.status as userstatus,TO_CHAR(p.submittedat , 'DD/MM/YYYY') as submittedat,o.organisation,o.location,o.logo,o.moa,o.aoa,o.incorporation,o.pan,o.gst from user_profile p inner join user_organisation o on p.userid = o.userid  where o.isprimary='Y' and o.active='Y' and p.userid=${req.params.id}`
+    let selectQuery=`Select p.firstname as username,p.surname,p.email,p.mobileno,p.status as userstatus,TO_CHAR(p.submittedat , 'DD/MM/YYYY') as submittedat,o.id as orgid,o.organisation,o.location,o.logo,o.moa,o.aoa,o.incorporation,o.pan,o.gst from user_profile p inner join user_organisation o on p.userid = o.userid  where o.isprimary='Y' and o.active='Y' and p.userid=${req.params.id}`
     console.log(selectQuery);
     client.query(selectQuery, (err, result)=>{
         if(!err){
@@ -357,5 +377,87 @@ router.get('/surname/list', (req, res, next)=>{
     client.end;
 });
 
+router.post('/organisation/catalogue/create',catalogueupload,function(req,res,next){
+    console.log("org catalogue create");
+    // console.log(req.files);
+    const catalogue = req.body;
+    console.log(catalogue);
+    var fileKeys = Object.keys(req.files);
+    var fileObj={};
+    fileKeys.forEach(function(key) {
+        console.log(req.files[key][0].fieldname+" : "+req.files[key][0].path);
+        if(req.files[key][0].fieldname=='brochure')
+        {
+            fileObj["brochure"]=req.files[key][0].path;
+        }
+        if(req.files[key][0].fieldname=='pictures')
+        {
+            
+            var picarr=[];
+            // console.log(req.files[key])
+            for(var i=0;i<req.files[key].length;i++)
+            {
+                // console.log(req.files[key][i]);
+                picarr.push(req.files[key][i].path);
+            }
+            fileObj["pictures"]=picarr;
+        
+        }
+
+        
+    });
+    
+    console.log(fileObj);
+    var category=''
+    let insertQuery = `insert into organisation_catalogue(organisationid,name, description, specifications,category, pricerange, pictures,brochure,active) values('${req.body.orgid}', '${req.body.name}', '${req.body.description}', '${req.body.specifications}', '${req.body.category}', '${req.body.pricerange}','${fileObj.pictures}','${fileObj.brochure}','Y') RETURNING id`
+    console.log(insertQuery);
+    client.query(insertQuery, (err, result)=>{
+        if(!err)
+        {
+            console.log('Insertion was successful');
+            console.log('row inserted with id: ' + result.rows[0].id);
+            return res.json({"status":"success"});
+        }
+        else
+        { 
+            console.log(err.message) ;
+            return res.json({"status":"error"});
+        }
+    });
+    client.end;      
+});
+
+router.get('/organisation/catalogue/:id', (req, res, next)=>{
+    console.log(req.params);
+    let selectQuery=`Select * from organisation_catalogue  where active='Y' and organisationid=${req.params.id}`
+    client.query(selectQuery, (err, result)=>{
+        if(!err){
+
+            console.log(result.rows);
+            return res.json({"status":"success","list":result.rows});
+        }
+        else
+        {
+            return res.json({"status":"error"});
+        }
+    });
+    client.end;
+});
+
+router.get('/organisation/catalogue/list', (req, res, next)=>{
+    console.log(req.params);
+    let selectQuery=`Select * from organisation_catalogue where active='Y'`
+    client.query(selectQuery, (err, result)=>{
+        if(!err){
+            console.log(result.rows);
+            return res.json({"status":"success","list":result.rows});
+        }
+        else
+        {
+            return res.json({"status":"error"});
+        }
+    });
+    client.end;
+});
 
 module.exports = router;

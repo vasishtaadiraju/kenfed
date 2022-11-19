@@ -30,9 +30,6 @@ app.use("/api",apiRouter);
 
 
 // Navigation
-app.get('/', (req, res) => {
-    res.render('login')
-})
 
 app.get('/login', (req, res) => {
    res.render('login')
@@ -82,6 +79,10 @@ app.get('/add-catalogue', (req, res) => {
     res.render('add-catalogue')
 })
 
+app.get('/view-catalogue', (req, res) => {
+    res.render('view-catalogue')
+})
+
 app.get('/add-lead', (req, res) => {
     res.render('add-lead')
 })
@@ -112,4 +113,22 @@ app.get('/waiting-verification', (req, res) => {
 
 app.get('/registration-success', (req, res) => {
     res.render('registration-success')
+})
+
+// Navigation
+//Public Pages
+app.get('/', (req, res) => {
+    res.render('home')
+})
+
+app.get('/category', (req, res) => {
+    res.render('category')
+})
+
+app.get('/product', (req, res) => {
+    res.render('product-detail')
+})
+
+app.get('/contact', (req, res) => {
+    res.render('contact')
 })

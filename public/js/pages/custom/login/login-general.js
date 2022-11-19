@@ -84,6 +84,7 @@ var KTLogin = function() {
 									}
 									if(data.userrole=='member')
 									{
+										console.log(data.userstatus);
 										if(data.userstatus=='REGISTERED')
 										{
 											location.replace("/submit-profile?id="+data.userid);

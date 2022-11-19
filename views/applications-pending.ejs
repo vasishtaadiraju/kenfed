@@ -51,8 +51,9 @@
     <!--begin::Main-->
     <!--begin::Header Mobile-->
     <div class="header-mobile align-items-center header-mobile-fixed" id="kt_header_mobile">
+      
         <!--begin::Logo-->
-        <a href="/"><img alt="Logo" src="media/logos/logo-light.png" /></a>
+        <a href="/"><img alt="Logo" src="assets/img/logo/logo2.png" /></a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
@@ -95,8 +96,9 @@
             <!--begin::Aside-->
             <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
                 <!--begin::Aside Menu-->
+                <a style="padding-left: 50px; padding-top: 20px;" href="/"><img alt="Logo" src="assets/img/logo/logo2.png" height="50px"/></a>
                 <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
-                    <%- include('partials/nav') %>
+                    <%- include('partials/adminnav') %>
                 </div>
                 <!--end::Aside Menu-->
             </div>
@@ -468,7 +470,7 @@
               contentType: 'application/json',
               url: '/api/user/'+id,
               success: function (data, status, xhr) {
-                console.log('data: ', data);
+                console.log('data application : ', data);
                 if(data.status=='success')
                 {
                   if(data.role!='admin')
@@ -487,7 +489,11 @@
                   }
                   if(data.role=='admin')
                   {
+                    $("#userprofilename").text("Admin");
+                    $("#userprofileemail").text(data.email);
+                    $("#applications").attr("href","/applications?id="+id);
                     getMembers(id);
+                   
                   }
 
                 }					

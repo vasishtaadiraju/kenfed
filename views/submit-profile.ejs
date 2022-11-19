@@ -35,7 +35,7 @@
 	<!--begin::Header Mobile-->
 	<div class="header-mobile align-items-center header-mobile-fixed" id="kt_header_mobile">
 		<!--begin::Logo-->
-		<a href="/"><img alt="Logo" src="media/logos/logo-light.png"></a> <!--end::Logo-->
+		<a href="/"><img alt="Logo" src="assets/img/logo/logo2.png"></a> <!--end::Logo-->
 		 <!--begin::Toolbar-->
 		<div class="d-flex align-items-center">
 			<!--begin::Aside Mobile Toggle-->
@@ -59,7 +59,7 @@
 				<!--begin::Brand-->
 				<div class="brand flex-column-auto" id="kt_brand">
 					<!--begin::Logo-->
-					<a class="brand-logo" href="/"><img alt="Logo" src="media/logos/logo-light.png"></a> <!--end::Logo-->
+					<a class="brand-logo" href="/"><img alt="Logo" src="assets/img/logo/logo2.png"></a> <!--end::Logo-->
 					 <!--begin::Toggle-->
 					 <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle"><span class="svg-icon svg-icon svg-icon-xl"><!--begin::Svg Icon | path:media/svg/icons/Navigation/Angle-double-left.svg--><svg height="24px" version="1.1" viewbox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
 					<g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
@@ -409,7 +409,7 @@
                 {     
                   for(var i=0;i<data.list.length;i++)
                   {
-                    console.log(data.list[i]);                   
+                    // console.log(data.list[i]);                   
 					$("#surname").append(new Option(data.list[i].name+"("+data.list[i].gothram+")",data.list[i].id));
                   }
                 }					
@@ -436,15 +436,32 @@
 					console.log('data: ', data);
 					if(data.status=='success')
 					{
-						$("#username").text(data.username.toLowerCase());
-						$("#userletter").text(data.username.charAt(0).toUpperCase());
-						$("#name").val(data.username);
-						$("#surname").val(data.surname);
-						$("#email").val(data.email);
-						$("#mobileno").val(data.mobileno);
-						$("#organisation").val(data.organisation);
-						$("#location").val(data.location);
-						getSurnames();
+						
+						if(data.userstatus=='REGISTERED')
+						{
+							$("#username").text(data.username.toLowerCase());$("#userprofilename").text(data.username.toLowerCase());$("#userprofileemail").text(data.email);
+							$("#userletter").text(data.username.charAt(0).toUpperCase());
+							$("#name").val(data.username);
+							$("#surname").val(data.surname);
+							$("#email").val(data.email);
+							$("#mobileno").val(data.mobileno);
+							$("#organisation").val(data.organisation);
+							$("#location").val(data.location);
+							$("#userid").val("");
+							getSurnames();
+						}
+						else if(data.userstatus=='SUBMITTED')
+						{
+							location.replace("/waiting-verification?id="+id);
+						}
+						else if(data.userstatus=='VERIFIED')
+						{
+							location.replace("/waiting-activation?id="+id);
+						}
+						else if(data.userstatus=='ACTIVE')
+						{
+							location.replace("/registration-success?id="+id);
+						}
 
 					}					
 				},

@@ -91,7 +91,7 @@
       id="kt_header_mobile"
     >
       <!--begin::Logo-->
-      <a href="/"><img alt="Logo" src="media/logos/logo-light.png" /></a>
+      <a href="/"><img alt="Logo" src="assets/img/logo/logo2.png" /></a>
       <!--end::Logo-->
       <!--begin::Toolbar-->
       <div class="d-flex align-items-center">
@@ -155,8 +155,8 @@
           <!--begin::Brand-->
           <div class="brand flex-column-auto" id="kt_brand">
             <!--begin::Logo-->
-            <a class="brand-logo" href="index.html">
-              <h2 style="color: #fff">KENFED</h2>
+            <a class="brand-logo" href="/">
+              <img alt="Logo" src="assets/img/logo/logo2.png" height="50px"/>
             </a>
             <!--end::Logo-->
             <!--begin::Toggle-->
@@ -284,7 +284,7 @@
                     </div>
                        <div class="separator separator-solid separator-white opacity-20"></div>
                     <div class="card-body text-white">
-                           Your business registration KYC for <b>PROTOCOL INDIA PVT LTD</b> has been successful. Welcome to KENFED.
+                           Your business registration KYC for <span id="organisation" class="text-capitalize" style="font-weight:bold"></span> has been successful. Welcome to KENFED.
                        </div>
                    </div>
               </div>
@@ -421,9 +421,32 @@
           console.log('data: ', data);
           if(data.status=='success')
           {
-            $("#username").text(data.username.toLowerCase());
-            $("#userletter").text(data.username.charAt(0).toUpperCase());
-            $("#submittedat").text(data.submittedat);
+            console.log("user status is : "+data.userstatus);
+            if(data.userstatus=='ACTIVE')
+            {
+              $("#username").text(data.username.toLowerCase());$("#userprofilename").text(data.username.toLowerCase());$("#userprofileemail").text(data.email);
+              $("#userletter").text(data.username.charAt(0).toUpperCase());
+              $("#submittedat").text(data.submittedat);
+              $("#organisation").text(data.organisation.toLowerCase());           
+              $("#userid").val(id);
+              $("#profile").attr("href","/profile?id="+id);
+              $("#catalogue").attr("href","/view-catalogue?id="+id);
+              console.log($("#userid").val());
+            }
+            else if(data.userstatus=='REGISTERED')
+            {
+              location.replace("/submit-profile?id="+id);
+            }
+            else if(data.userstatus=='SUBMITTED')
+            {
+              location.replace("/waiting-verification?id="+id);
+            }
+            else if(data.userstatus=='VERIFIED')
+            {
+              location.replace("/waiting-activation?id="+id);
+            }
+            
+            
           }					
         },
         error(){

@@ -35,7 +35,7 @@
 	<!--begin::Header Mobile-->
 	<div class="header-mobile align-items-center header-mobile-fixed" id="kt_header_mobile">
 		<!--begin::Logo-->
-		<a href="/"><img alt="Logo" src="media/logos/logo-light.png"></a> <!--end::Logo-->
+		<a href="/"><img alt="Logo" src="assets/img/logo/logo2.png"></a> <!--end::Logo-->
 		 <!--begin::Toolbar-->
 		<div class="d-flex align-items-center">
 			<!--begin::Aside Mobile Toggle-->
@@ -59,7 +59,7 @@
 				<!--begin::Brand-->
 				<div class="brand flex-column-auto" id="kt_brand">
 					<!--begin::Logo-->
-					<a class="brand-logo" href="/"><img alt="Logo" src="media/logos/logo-light.png"></a> <!--end::Logo-->
+					<a class="brand-logo" href="/"><img alt="Logo" src="assets/img/logo/logo2.png"></a> <!--end::Logo-->
 					 <!--begin::Toggle-->
 					 <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle"><span class="svg-icon svg-icon svg-icon-xl"><!--begin::Svg Icon | path:media/svg/icons/Navigation/Angle-double-left.svg--><svg height="24px" version="1.1" viewbox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
 					<g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
@@ -95,7 +95,7 @@
 								<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div><!--end::Separator-->
 								<!--begin::Search Form-->
 								<div class="d-flex align-items-center" id="kt_subheader_search">
-									<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Manish G</span>
+									<!-- <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Manish G</span> -->
 								</div><!--end::Search Form-->
 							</div><!--end::Details-->
 							<!--begin::Toolbar-->
@@ -139,7 +139,7 @@
 													<path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"></path>
 												</g></svg><!--end::Svg Icon--></span></span> <span class="nav-text font-size-lg">Business KYC<span style="font-family: wingdings; font-size: 200%;">&#x2611;</span></span></a>
 											</li><!--end::Item-->
-											<li class="nav-item mr-3">
+											<li class="nav-item mr-3" style="display:none">
 												<a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_3"><span class="nav-icon"><span class="svg-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Shield-user.svg--><svg height="24px" version="1.1" viewbox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
 												<g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
 													<rect height="24" width="24" x="0" y="0"></rect>
@@ -174,18 +174,18 @@
 														<div class="form-group row">
 															<label class="col-form-label col-3 text-lg-right text-left">First Name</label>
 															<div class="col-9">
-																<input class="form-control form-control-lg form-control-solid" type="text" value="Manish">
+																<input class="form-control form-control-lg form-control-solid" type="text" id="name" value="">
 															</div>
 														</div><!--end::Group-->
 														<!--begin::Form group-->
 														<div class="form-group row">
 															<label class="col-form-label col-3 text-lg-right text-left">Surname</label>
 															<div class="col-9">
-																<select class="form-control form-control-lg form-control-solid" id="exampleSelect1">
+																<select class="form-control form-control-lg form-control-solid" id="surname" value="">
 																	<option disabled="disabled" selected="true">
 																		Select your Surname
 																	</option>
-																	<option>
+																	<!-- <option>
 																		Alugunuru (Gothram: PASUPATI)
 																	</option>
 																	<option>
@@ -199,7 +199,7 @@
 																	</option>
 																	<option>
 																		Addepalli (Gothram: KAUNDINYA)
-																	</option>
+																	</option> -->
 																</select>
 															</div>
 														</div><!--end::Form group-->
@@ -210,7 +210,7 @@
 																<div class="input-group input-group-lg input-group-solid">
 																	<div class="input-group-prepend">
 																		<span class="input-group-text"><i class="la la-at"></i></span>
-																	</div><input class="form-control form-control-lg form-control-solid" placeholder="Email" type="text" value="manish@outshade.com">
+																	</div><input class="form-control form-control-lg form-control-solid" placeholder="Email" type="text" id="email" value="">
 																</div>
 															</div>
 														</div><!--end::Group-->
@@ -221,7 +221,7 @@
 																<div class="input-group input-group-lg input-group-solid">
 																	<div class="input-group-prepend">
 																		<span class="input-group-text"><i class="la la-phone"></i></span>
-																	</div><input class="form-control form-control-lg form-control-solid" placeholder="Phone" type="text" value="+91 8801112826">
+																	</div><input class="form-control form-control-lg form-control-solid" placeholder="Phone" type="text" id="mobileno" value="">
 																</div><span class="form-text text-muted">We'll never share your contact with anyone else.</span>
 															</div>
 														</div><!--end::Group-->
@@ -229,14 +229,14 @@
 														<div class="form-group row">
 															<label class="col-form-label col-3 text-lg-right text-left">Name of the Organisation</label>
 															<div class="col-9">
-																<input class="form-control form-control-lg form-control-solid" type="text" value="KENFED">
+																<input class="form-control form-control-lg form-control-solid" type="text" id="organisation" value="">
 															</div>
 														</div><!--end::Group-->
 														<!--begin::Group-->
 														<div class="form-group row">
 															<label class="col-form-label col-3 text-lg-right text-left">Location of Business</label>
 															<div class="col-9">
-																<input class="form-control form-control-lg form-control-solid" type="text" value="Hyderabad">
+																<input class="form-control form-control-lg form-control-solid" type="text" id="location" value="">
 															</div>
 														</div><!--end::Group-->
 													</div>
@@ -249,61 +249,32 @@
 													<div class="col-xl-2"></div>
 													<div class="col-xl-7">
 														<div class="my-2">
-															<!--begin::Group-->
-															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">MOA</label>
-																<div class="col-9">
-																	<div></div>
-																		<div class="custom-file">
-																		<input type="file" class="custom-file-input" id="customFile"/>
-																		<label class="custom-file-label" for="customFile">Choose file</label>
-																		</div>
-																</div>
-															</div><!--end::Group-->
-															<!--begin::Group-->
-															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">AOA</label>
-																<div class="col-9">
-																	<div></div>
-																		<div class="custom-file">
-																		<input type="file" class="custom-file-input" id="customFile"/>
-																		<label class="custom-file-label" for="customFile">Choose file</label>
-																		</div>
-																</div>
-															</div><!--end::Group-->
-															<!--begin::Group-->
-															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">CERTIFICATE OF INCORPORATION</label>
-																<div class="col-9">
-																	<div></div>
-																		<div class="custom-file">
-																		<input type="file" class="custom-file-input" id="customFile"/>
-																		<label class="custom-file-label" for="customFile">Choose file</label>
-																		</div>
-																</div>
-															</div><!--end::Group-->
-															<!--begin::Group-->
-															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">PAN</label>
-																<div class="col-9">
-																	<div></div>
-																		<div class="custom-file">
-																		<input type="file" class="custom-file-input" id="customFile"/>
-																		<label class="custom-file-label" for="customFile">Choose file</label>
-																		</div>
-																</div>
-															</div><!--end::Group-->
-															<!--begin::Group-->
-															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">GST</label>
-																<div class="col-9">
-																	<div></div>
-																		<div class="custom-file">
-																		<input type="file" class="custom-file-input" id="customFile"/>
-																		<label class="custom-file-label" for="customFile">Choose file</label>
-																		</div>
-																</div>
-															</div><!--end::Group-->
+															<div class="form-group mb-1">
+																<label for="exampleTextarea">MOA</label>
+																<br>
+																<a id="moa" href="#" target="_blank">Download_MOA.pdf</a>
+															 </div>
+															  <br>
+															  <div class="form-group mb-1">
+																<label for="exampleTextarea">AOA</label>
+																<br>
+																<a id="aoa" href="#">Download_AOA.pdf</a> </div>
+															  <br>
+															  <div class="form-group mb-1">
+																<label for="exampleTextarea">Certificate Of Incorporation</label>
+																<br>
+																<a id="incorporation" href="#">Download_CertificateOfIncorporation.pdf</a> </div>
+															  <br>
+															  <div class="form-group mb-1">
+																<label for="exampleTextarea">PAN</label>
+																<br>
+																<a id="pan" href="#">Download_PAN.pdf</a></div>
+															  <br>
+															  <div class="form-group mb-1">
+																<label for="exampleTextarea">GST</label>
+																<br>
+																<a id="gst" href="#">Download_GST.pdf</a>
+															</div>
 														</div>
 													</div>
 													<div class="col-xl-2"></div>
@@ -473,6 +444,93 @@
 	 
 	<script src="js/pages/custom/user/edit-user.js">
 	</script> <!--end::Page Scripts-->
+	<script>
+		function getSurnames()
+		{	
+			console.log("get surnames");
+			$.ajax({
+              type: 'GET',
+              dataType:"json",
+              contentType: 'application/json',
+              url: '/api/surname/list',
+              success: function (data, status, xhr) {
+                console.log('data: ', data);
+                if(data.status=='success')
+                {     
+                  for(var i=0;i<data.list.length;i++)
+                  {
+                    // console.log(data.list[i]);                   
+					$("#surname").append(new Option(data.list[i].name+"("+data.list[i].gothram+")",data.list[i].id));
+                  }
+                }					
+              },
+              error(){
+                console.log('Error');
+              }
+            });
+
+
+		}
+		$(document).ready(function() {
+            console.log( "ready!" );
+			var params = (new URL(location)).searchParams;
+			var id = params.get("id");
+			$("#username").text("");
+			$("#userletter").text("");
+			$.ajax({
+				type: 'GET',
+				dataType:"json",
+				contentType: 'application/json',
+				url: '/api/user/profile/'+id,
+				success: function (data, status, xhr) {
+					console.log('data: ', data);
+					if(data.status=='success')
+					{
+						
+						if(data.userstatus=='ACTIVE')
+						{
+							$("#username").text(data.username.toLowerCase());$("#userprofilename").text(data.username.toLowerCase());$("#userprofileemail").text(data.email);
+							$("#userletter").text(data.username.charAt(0).toUpperCase());
+							$("#name").val(data.username);
+							$("#surname").val(data.surname);
+							$('#surname').prop('disabled', true);
+							$("#email").val(data.email);
+							$("#mobileno").val(data.mobileno);
+							$("#organisation").val(data.organisation);
+							$("#location").val(data.location);
+							$("#moa").attr("href", data.moa);
+							$("#aoa").attr("href", data.aoa);
+							$("#incorporation").attr("href", data.incorporation);
+							$("#pan").attr("href", data.pan);
+							$("#gst").attr("href", data.gst);
+							$("#userid").val(id);
+							console.log($("#userid").val());
+							$("#profile").attr("href","/profile?id="+id);
+							$("#catalogue").attr("href","/view-catalogue?id="+id);
+							getSurnames();          	
+						}
+						else if(data.userstatus=='REGISTERED')
+						{
+							location.replace("/submit-profile?id="+id);
+						}
+						else if(data.userstatus=='SUBMITTED')
+						{
+							location.replace("/waiting-verification?id="+id);
+						}
+						else if(data.userstatus=='VERIFIED')
+						{
+							location.replace("/waiting-activation?id="+id);
+						}
+
+					}					
+				},
+				error(){
+					console.log('Error');
+				}
+			});
+			
+        });
+	</script>
 	 <!--end::Body-->
 </body>
 </html>

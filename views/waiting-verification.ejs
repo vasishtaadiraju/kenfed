@@ -91,7 +91,7 @@
       id="kt_header_mobile"
     >
       <!--begin::Logo-->
-      <a href="/"><img alt="Logo" src="media/logos/logo-light.png" /></a>
+      <a href="/"><img alt="Logo" src="assets/img/logo/logo2.png" /></a>
       <!--end::Logo-->
       <!--begin::Toolbar-->
       <div class="d-flex align-items-center">
@@ -155,8 +155,8 @@
           <!--begin::Brand-->
           <div class="brand flex-column-auto" id="kt_brand">
             <!--begin::Logo-->
-            <a class="brand-logo" href="index.html">
-              <h2 style="color: #fff">KENFED</h2>
+            <a class="brand-logo" href="/">
+              <img alt="Logo" src="assets/img/logo/logo2.png" height="50px"/>
             </a>
             <!--end::Logo-->
             <!--begin::Toggle-->
@@ -424,9 +424,26 @@
 					console.log('data: ', data);
 					if(data.status=='success')
 					{
-						$("#username").text(data.username.toLowerCase());
-						$("#userletter").text(data.username.charAt(0).toUpperCase());
-                        $("#submittedat").text(data.submittedat);
+						
+            if(data.userstatus=='REGISTERED')
+            {
+              location.replace("/submit-profile?id="+id);
+            }
+            else if(data.userstatus=='SUBMITTED')
+            {
+              $("#username").text(data.username.toLowerCase());$("#userprofilename").text(data.username.toLowerCase());$("#userprofileemail").text(data.email);
+              $("#userletter").text(data.username.charAt(0).toUpperCase());
+              $("#submittedat").text(data.submittedat);
+              $("#userid").val("");
+            }
+            else if(data.userstatus=='VERIFIED')
+            {
+              location.replace("/waiting-activation?id="+id);
+            }
+            else if(data.userstatus=='ACTIVE')
+            {
+              location.replace("/registration-success?id="+id);
+            }
 					}					
 				},
 				error(){

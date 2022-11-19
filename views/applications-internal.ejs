@@ -52,7 +52,7 @@
     <!--begin::Header Mobile-->
     <div class="header-mobile align-items-center header-mobile-fixed" id="kt_header_mobile">
         <!--begin::Logo-->
-        <a href="/"><img alt="Logo" src="media/logos/logo-light.png" /></a>
+        <a href="/"><img alt="Logo" src="assets/img/logo/logo2.png" /></a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
@@ -94,9 +94,11 @@
         <div class="d-flex flex-row flex-column-fluid page">
             <!--begin::Aside-->
             <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
+                <a style="padding-left: 50px; padding-top: 20px;" href="/"><img alt="Logo" src="assets/img/logo/logo2.png" height="50px"/></a>
+                
                 <!--begin::Aside Menu-->
                 <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
-                    <%- include('partials/nav') %>
+                    <%- include('partials/adminnav') %>
                 </div>
                 <!--end::Aside Menu-->
             </div>
@@ -481,7 +483,7 @@
                     {     
                     for(var i=0;i<data.list.length;i++)
                     {
-                        console.log(data.list[i]);                   
+                        // console.log(data.list[i]);                   
                         $("#surname").append(new Option(data.list[i].name+"("+data.list[i].gothram+")",data.list[i].id));
                     }
                     }					
@@ -525,6 +527,9 @@
                     }
                     else
                     {
+                        $("#userprofilename").text("Admin");
+                        $("#userprofileemail").text(data.email);
+                        $("#applications").attr("href","/applications?id="+id);
                         getProfileData(member);
                     }
   

@@ -52,7 +52,7 @@
     <!--begin::Header Mobile-->
     <div class="header-mobile align-items-center header-mobile-fixed" id="kt_header_mobile">
         <!--begin::Logo-->
-        <a href="/"><img alt="Logo" src="media/logos/logo-light.png" /></a>
+        <a href="/"><img alt="Logo" src="assets/img/logo/logo2.png" /></a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
@@ -97,8 +97,8 @@
                 <!--begin::Brand-->
                 <div class="brand flex-column-auto" id="kt_brand">
                     <!--begin::Logo-->
-                    <a class="brand-logo" href="index.html">
-                        <h2 style="color: #fff">KENFED</h2>
+                    <a class="brand-logo" href="/">
+                        <img alt="Logo" src="assets/img/logo/logo2.png" height="50px"/>
                     </a>
                     <!--end::Logo-->
                     <!--begin::Toggle-->
@@ -164,8 +164,8 @@
                                 <!--end::Separator-->
                                 <!--begin::Search Form-->
                                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Catalogue
-                                        List</span>
+                                    <!-- <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Catalogue
+                                        List</span> -->
                                 </div>
                                 <!--end::Search Form-->
                             </div>
@@ -179,25 +179,54 @@
                         <div class="container">
                             <div class="card card-custom">
                                 <!--begin::Form-->
-                                <form>
+                                <form class="form" id="add_catalogue_form" name="add_catalogue_form" enctype="multipart/form-data" >
                                  <div class="card-body">
                                   <div class="form-group">
                                    <label>Name of the Product/Service <span class="text-danger">*</span></label>
-                                   <input type="text" class="form-control"  placeholder="Enter product or service name"/>
+                                   <input type="text" class="form-control"  placeholder="Enter product or service name" id="name" />
                                   </div>
                                   <div class="form-group mb-1">
                                     <label for="exampleTextarea">Product or Service Description <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Enter description about the product or service"></textarea>
+                                    <textarea class="form-control" id="description" rows="3"  placeholder="Enter description about the product or service"></textarea>
                                   </div>
                                   <br>
                                   <div class="form-group mb-1">
                                     <label for="exampleTextarea">Product or Service Specifications <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Enter specifications about the product or service"></textarea>
+                                    <textarea class="form-control" id="specifications" rows="3" placeholder="Enter specifications about the product or service"></textarea>
                                   </div>
                                   <br>
                                   <div class="form-group">
+                                    <label for="exampleSelect1">Category select <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="category" multiple>
+                                        <option>Machinery</option>
+                                        <option>Electronics</option>
+                                        <option>Beauty</option>
+                                        <option>Security</option>
+                                        <option>Chemicals</option>
+                                        <option>Healthcare</option>
+                                        <option>Entertainment</option>
+                                        <option>Agriculture</option>
+                                        <option>Apparels</option>
+                                        <option>Packaging</option>
+                                        <option>Gifts & Toys</option>
+                                        <option>Commercial</option>
+                                        <option>Lights & Lighting</option>
+                                        <option>School Supplies</option>
+                                        <option>Luggage</option>
+                                        <option>Environment</option>
+                                        <option>Home & Garden</option>
+                                        <option>Electric Supplies</option>
+                                        <option>Footwear</option>
+                                        <option>Fabric</option>
+                                        <option>Hardware</option>
+                                        <option>Metallurgy</option>
+                                        <option>Professional Services</option>
+                                        
+                                    </select>
+                                   </div>
+                                  <div class="form-group">
                                    <label for="exampleSelect1">Price Range select <span class="text-danger">*</span></label>
-                                   <select class="form-control" id="exampleSelect1">
+                                   <select class="form-control" id="pricerange">
                                     <option>₹</option>
                                     <option>₹₹</option>
                                     <option>₹₹₹</option>
@@ -210,7 +239,7 @@
                                     <label>Upload Product Pictures</label>
                                     <div></div>
                                     <div class="custom-file">
-                                     <input type="file" class="custom-file-input" id="customFile"/>
+                                     <input type="file" class="custom-file-input" id="pictures" multiple/>
                                      <label class="custom-file-label" for="customFile">Choose files</label>
                                     </div>
                                    </div>
@@ -218,15 +247,15 @@
                                     <label>Upload Brochure</label>
                                     <div></div>
                                     <div class="custom-file">
-                                     <input type="file" class="custom-file-input" id="customFile"/>
+                                     <input type="file" class="custom-file-input" id="brochure"/>
                                      <label class="custom-file-label" for="customFile">Choose file</label>
                                     </div>
                                    </div>
                                  </div>
                                  <div class="card-footer">
-                                  <button type="reset" class="btn btn-primary mr-2">Add</button>
-                                  <button type="reset" class="btn btn-secondary">Cancel</button>
+                                  <button type="button" class="btn btn-primary mr-2" onclick="addCatalogue()">Add</button>
                                  </div>
+                                 <input type="hidden" id="orgid" value=""/>
                                 </form>
                                 <!--end::Form-->
                                </div>
@@ -333,6 +362,126 @@
 
         <script src="js/pages/custom/user/edit-user.js"></script>
         <!--end::Page Scripts-->
+        <script>
+            function addCatalogue()
+            {
+                console.log("add catalogue");
+                console.log($("#orgid").val());
+                var params = (new URL(location)).searchParams;
+			    var id = params.get("id");
+                var formData  = new FormData();	
+				var formElements=document.getElementById("add_catalogue_form").elements;   
+				for (var i=0; i<formElements.length; i++)
+				{			
+					if(formElements[i].type!='checkbox' && formElements[i].type!='button' && formElements[i].type!='file')
+					{
+						console.log(formElements[i].type+" : "+formElements[i].id+" : "+$("#"+formElements[i].id).val());
+                        formData.append(formElements[i].id,$("#"+formElements[i].id).val());
+					}
+				}			
+                console.log(formData.get('name'));
+                var pictureslist = document.getElementById('pictures').files;
+                for(var i=0;i<pictureslist.length;i++)
+                {
+                    formData.append('pictures', pictureslist[i]);
+                }               
+                var brochure = document.getElementById('brochure').files[0];
+                formData.append('brochure', brochure);
+                var url="/api/organisation/catalogue/create";
+					console.log(url);
+					console.log(formData);
+					$.ajax({
+						type: "POST",
+						enctype: 'multipart/form-data',
+						url: url,
+						data: formData,
+						processData: false,
+						contentType: false,
+						cache: false,
+						timeout: 600000,
+						success: function (data) {
+							console.log("SUCCESS : ", data);
+							if(data.status=='success')
+							{
+								swal.fire({
+									text: "Catalogue is saved successfully.",
+									icon: "success",
+									buttonsStyling: false,
+									confirmButtonText: "Ok",
+									customClass: {
+										confirmButton: "btn font-weight-bold btn-light-primary"
+									}
+								}).then(function() {
+									location.replace("/add-catalogue?id="+id);
+								});
+							}
+							else
+							{
+								swal.fire({
+									text: "Something went wrong.Please try again later",
+									icon: "error",
+									buttonsStyling: false,
+									confirmButtonText: "Ok",
+									customClass: {
+										confirmButton: "btn font-weight-bold btn-light-primary"
+									}
+								});
+							}
+						},
+						error: function (e) {
+							console.log("ERROR : ", e);
+						}
+					});
+
+            }
+            $(document).ready(function() {
+            console.log( "ready!" );
+			var params = (new URL(location)).searchParams;
+			var id = params.get("id");
+            
+			$("#username").text("");
+			$("#userletter").text("");
+			$.ajax({
+				type: 'GET',
+				dataType:"json",
+				contentType: 'application/json',
+				url: '/api/user/profile/'+id,
+				success: function (data, status, xhr) {
+					console.log('data: ', data);
+					if(data.status=='success')
+					{
+						
+                        if(data.userstatus=='ACTIVE')
+						{
+							$("#username").text(data.username.toLowerCase());$("#userprofilename").text(data.username.toLowerCase());$("#userprofileemail").text(data.email);
+                            $("#userletter").text(data.username.charAt(0).toUpperCase());
+                            $("#orgid").val(data.orgid);
+							$("#userid").val(id);
+							console.log($("#userid").val());
+							$("#profile").attr("href","/profile?id="+id);
+							$("#catalogue").attr("href","/view-catalogue?id="+id);
+							getSurnames();          	
+						}
+						else if(data.userstatus=='REGISTERED')
+						{
+							location.replace("/submit-profile?id="+id);
+						}
+						else if(data.userstatus=='SUBMITTED')
+						{
+							location.replace("/waiting-verification?id="+id);
+						}
+						else if(data.userstatus=='VERIFIED')
+						{
+							location.replace("/waiting-activation?id="+id);
+						}
+					}					
+				},
+				error(){
+					console.log('Error');
+				}
+			});
+        });
+        </script>
         <!--end::Body-->
 </body>
 
