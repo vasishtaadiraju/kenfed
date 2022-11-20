@@ -379,7 +379,7 @@ router.get('/surname/list', (req, res, next)=>{
 
 router.post('/organisation/catalogue/create',catalogueupload,function(req,res,next){
     console.log("org catalogue create");
-    // console.log(req.files);
+    console.log(req.files);
     const catalogue = req.body;
     console.log(catalogue);
     var fileKeys = Object.keys(req.files);
@@ -459,5 +459,16 @@ router.get('/organisation/catalogue/list', (req, res, next)=>{
     });
     client.end;
 });
+
+router.get('/attachment', (req, res, next)=>{
+    console.log("get attachment");
+    console.log(req.query.attachurl);
+    var contents = fs.readFileSync(req.query.attachurl, {encoding: 'base64'});
+    // console.log(contents);
+    return res.json({"status":"success","attach_base64_string":contents});
+
+});
+
+
 
 module.exports = router;

@@ -207,6 +207,27 @@
                         <!--end::Container-->
                     </div>
                     <!--end::Entry-->
+                    <div class="modal fade" id="kt_select2_modal" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modal-title"></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                    </button>
+                                </div>
+                                <form class="form">
+                                    <div class="modal-body" style="min-height: 300px;text-align:center">
+                                        <div id="attachment">												
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary mr-2" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!--end::Content-->
                 <%- include('partials/footer') %>
@@ -326,10 +347,11 @@
                         console.log('data: ', data);
                         if(data.status=='success')
                         {     
-                            var tablehtml='';          
+                                     
                             for(var i=0;i<data.list.length;i++)
                             {
                                 console.log(data.list[i]);
+                                var tablehtml=''; 
                                 tablehtml+='<tr>';
                                 tablehtml+='<th scope="row" style="text-align: center;">'+data.list[i].id+'</th>';
                                 tablehtml+='<td class="text-capitalize" style="text-align: center;">'+data.list[i].name.toLowerCase()+'</td>';
@@ -337,12 +359,23 @@
                                 tablehtml+='<td style="text-align: center;">'+data.list[i].specifications+'</td>';
                                 tablehtml+='<td style="text-align: center;">'+data.list[i].category+'</td>';
                                 tablehtml+='<td style="text-align: center;">'+data.list[i].pricerange+'</td>';
-                                tablehtml+='<td style="text-align: center;"><a href="'+data.list[i].pictures+'">view</a></td>';
-                                tablehtml+='<td style="text-align: center;"><a href="'+data.list[i].brochure+'">view</a></td>';
+                                tablehtml+='<td style="text-align: center;"><a id="pictures'+i+'" href="#">view</a></td>';
+                                tablehtml+='<td style="text-align: center;"><a id="brochure'+i+'" href="#">view</a></td>';
                                 tablehtml+='</tr>';
+                                $("#catalogue_tbody").append(tablehtml);
+                                var pictures_url=data.list[i].pictures;
+                                $("#pictures"+i).click(function(){
+                                    openAttachment(pictures_url,"Pictures");
+                                    
+                                });
+                                var brochure_url=data.list[i].brochure;
+                                $("#brochure"+i).click(function(){
+                                    openAttachment(brochure_url,"Brochure");
+                                    
+                                });
 
                             }
-                            $("#catalogue_tbody").html(tablehtml);
+                            
                             
                         }					
                     },
@@ -351,6 +384,42 @@
                     }
                 });
 
+            }
+            function openAttachment(attachurl,attachname)
+            {
+                console.log(attachurl);
+                console.log(attachname);
+                $("#attachment").html("");
+                // var extension = attachurl.substring(attachurl.lastIndexOf(".")+1, attachurl.length).toLowerCase();
+                // console.log("extension : "+extension);
+                var attach_list=attachurl.split(",");
+                for(var i=0;i<attach_list.length;i++)
+                {
+                    console.log(attach_list[i]);
+                    var url='/api/attachment?attachurl='+attach_list[i];
+                    $.ajax({
+                    type: 'GET',
+                    dataType:"json",
+                    contentType: 'application/json',
+                    url: url,
+                    success: function (data, status, xhr) {
+                        console.log('data: ', data);
+                        if(data.status=='success')
+                        {     
+                            $("#modal-title").text(attachname);
+                            // console.log(data.attach_base64_string);
+                            var html = '<img src="data:image/jpeg;base64,'+data.attach_base64_string+'" height="250px" width="250px" style="margin:20px"/>';
+                            $("#attachment").append(html);
+                            $("#kt_select2_modal").modal("show");
+                        }					
+                    },
+                    error(){
+                        console.log('Error');
+                    }
+                    });
+                }
+                
+                        
             }
             $(document).ready(function() {
             console.log( "ready!" );

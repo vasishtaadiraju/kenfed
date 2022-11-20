@@ -59,7 +59,7 @@
 				<!--begin::Brand-->
 				<div class="brand flex-column-auto" id="kt_brand">
 					<!--begin::Logo-->
-					<a class="brand-logo" href="/"><img alt="Logo" src="assets/img/logo/logo2.png"></a> <!--end::Logo-->
+					<a class="brand-logo" href="/"><img alt="Logo" src="assets/img/logo/logo2.png" height="50px"></a> <!--end::Logo-->
 					 <!--begin::Toggle-->
 					 <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle"><span class="svg-icon svg-icon svg-icon-xl"><!--begin::Svg Icon | path:media/svg/icons/Navigation/Angle-double-left.svg--><svg height="24px" version="1.1" viewbox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
 					<g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
@@ -239,6 +239,7 @@
 																<input class="form-control form-control-lg form-control-solid" type="text" id="location" value="">
 															</div>
 														</div><!--end::Group-->
+														
 													</div>
 												</div><!--end::Row-->
 											</div><!--end::Tab-->
@@ -252,7 +253,7 @@
 															<div class="form-group mb-1">
 																<label for="exampleTextarea">MOA</label>
 																<br>
-																<a id="moa" href="#" target="_blank">Download_MOA.pdf</a>
+																<a id="moa" href="#">Download_MOA.pdf</a>
 															 </div>
 															  <br>
 															  <div class="form-group mb-1">
@@ -356,6 +357,27 @@
 									</form>
 								</div><!--end:Card body-->
 							</div><!--end::Card-->
+							<div class="modal fade" id="kt_select2_modal" style="display: none;" aria-hidden="true">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="modal-title"></h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<i aria-hidden="true" class="ki ki-close"></i>
+											</button>
+										</div>
+										<form class="form">
+											<div class="modal-body" style="min-height: 500px;">
+												<div id="attachment">												
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary mr-2" data-dismiss="modal">Close</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div><!--end::Container-->
 					</div><!--end::Entry-->
 				</div><!--end::Content-->
@@ -471,6 +493,37 @@
 
 
 		}
+		function openAttachment(attachurl,attachname)
+		{
+			console.log(attachurl);
+			// var extension = attachurl.substring(attachurl.lastIndexOf(".")+1, attachurl.length).toLowerCase();
+			// console.log("extension : "+extension);
+			var url='/api/attachment?attachurl='+attachurl;
+			$.ajax({
+              type: 'GET',
+              dataType:"json",
+              contentType: 'application/json',
+              url: url,
+              success: function (data, status, xhr) {
+                console.log('data: ', data);
+                if(data.status=='success')
+                {     
+					$("#modal-title").text(attachname);
+					// console.log(data.attach_base64_string);
+					var html = '<embed width="100%" height="500px" src="data:application/pdf;base64,'+data.attach_base64_string+'" type="application/pdf" />';
+					$("#attachment").html(html);
+                	$("#kt_select2_modal").modal("show");
+                }					
+              },
+              error(){
+                console.log('Error');
+              }
+            });
+					
+		}
+		
+
+
 		$(document).ready(function() {
             console.log( "ready!" );
 			var params = (new URL(location)).searchParams;
@@ -498,11 +551,32 @@
 							$("#mobileno").val(data.mobileno);
 							$("#organisation").val(data.organisation);
 							$("#location").val(data.location);
-							$("#moa").attr("href", data.moa);
-							$("#aoa").attr("href", data.aoa);
-							$("#incorporation").attr("href", data.incorporation);
-							$("#pan").attr("href", data.pan);
-							$("#gst").attr("href", data.gst);
+							// $("#moa").attr("href", data.moa);
+							// $("#aoa").attr("href", data.aoa);
+							// $("#incorporation").attr("href", data.incorporation);
+							// $("#pan").attr("href", data.pan);
+							// $("#gst").attr("href", data.gst);
+							$("#moa").click(function(){
+								openAttachment(data.moa,"MOA");
+								return false;							
+							});
+							$("#aoa").click(function(){
+								openAttachment(data.aoa,"AOA");
+								return false;
+							});
+							$("#incorporation").click(function(){
+								openAttachment(data.incorporation,"Certificate Of Incorporation");
+								return false;
+							});
+							$("#pan").click(function(){
+								openAttachment(data.pan,"PAN");
+								return false;
+							});
+							$("#gst").click(function(){
+								openAttachment(data.gst,"GST");
+								return false;
+							});
+
 							$("#userid").val(id);
 							console.log($("#userid").val());
 							$("#profile").attr("href","/profile?id="+id);

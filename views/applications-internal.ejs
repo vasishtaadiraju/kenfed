@@ -151,7 +151,7 @@
                                 <form>
                                     <div class="card-body">
                                      <div class="form-group">
-                                      <label>Full Name<span class="text-danger">*</span></label>
+                                      <label>Full Name</label>
                                       <input type="text" class="form-control"  id="name" value=""/>
                                      </div>
                                     <div class="form-group">
@@ -163,48 +163,48 @@
                                         </select>
                                     </div>
                                      <div class="form-group mb-1">
-                                       <label for="exampleTextarea">Email<span class="text-danger">*</span></label>
+                                       <label for="exampleTextarea">Email</label>
                                        <input type="text" class="form-control"  id="email" value=""/>
                                      </div>
                                      <br>
                                      <div class="form-group mb-1">
-                                       <label for="exampleTextarea">Mobile Number<span class="text-danger">*</span></label>
+                                       <label for="exampleTextarea">Mobile Number</label>
                                        <input type="text" class="form-control" id="mobileno" value=""/>
                                      </div>
                                      <br>
                                      <div class="form-group mb-1">
-                                        <label for="exampleTextarea">Name Of The Organization<span class="text-danger">*</span></label>
+                                        <label for="exampleTextarea">Name Of The Organization</label>
                                         <input type="text" class="form-control"  id="organisation" value=""/>
                                       </div>
                                       <br>
                                      <div class="form-group mb-1">
-                                        <label for="exampleTextarea">Location Of Business<span class="text-danger">*</span></label>
+                                        <label for="exampleTextarea">Location Of Business</label>
                                         <input type="text" class="form-control" id="location" value=""/>
                                      </div>
                                       <br>
                                       <div class="form-group mb-1">
-                                        <label for="exampleTextarea">MOA<span class="text-danger">*</span></label>
+                                        <label for="exampleTextarea">MOA</label>
                                         <br>
-                                        <a id="moa" href="#" target="_blank">Download_MOA.pdf</a>
+                                        <a id="moa" href="#">Download_MOA.pdf</a>
                                      </div>
                                       <br>
                                       <div class="form-group mb-1">
-                                        <label for="exampleTextarea">AOA<span class="text-danger">*</span></label>
+                                        <label for="exampleTextarea">AOA</label>
                                         <br>
                                         <a id="aoa" href="#">Download_AOA.pdf</a> </div>
                                       <br>
                                       <div class="form-group mb-1">
-                                        <label for="exampleTextarea">Certificate Of Incorporation<span class="text-danger">*</span></label>
+                                        <label for="exampleTextarea">Certificate Of Incorporation</label>
                                         <br>
                                         <a id="incorporation" href="#">Download_CertificateOfIncorporation.pdf</a> </div>
                                       <br>
                                       <div class="form-group mb-1">
-                                        <label for="exampleTextarea">PAN<span class="text-danger">*</span></label>
+                                        <label for="exampleTextarea">PAN</label>
                                         <br>
                                         <a id="pan" href="#">Download_PAN.pdf</a></div>
                                       <br>
                                       <div class="form-group mb-1">
-                                        <label for="exampleTextarea">GST<span class="text-danger">*</span></label>
+                                        <label for="exampleTextarea">GST</label>
                                         <br>
                                         <a id="gst" href="#">Download_GST.pdf</a>
                                     </div>
@@ -216,6 +216,27 @@
                                     </div>
                                    </form>
                                    <!--end::Form-->
+                                </div>
+                                <div class="modal fade" id="kt_select2_modal" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modal-title"></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                                </button>
+                                            </div>
+                                            <form class="form">
+                                                <div class="modal-body" style="min-height: 500px;">
+                                                    <div id="attachment">												
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary mr-2" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end::Entry-->
                             </div>
@@ -344,11 +365,31 @@
                             $("#mobileno").val(data.mobileno);
                             $("#organisation").val(data.organisation);
                             $("#location").val(data.location);
-                            $("#moa").attr("href", data.moa);
-                            $("#aoa").attr("href", data.aoa);
-                            $("#incorporation").attr("href", data.incorporation);
-                            $("#pan").attr("href", data.pan);
-                            $("#gst").attr("href", data.gst);
+                            // $("#moa").attr("href", data.moa);
+                            // $("#aoa").attr("href", data.aoa);
+                            // $("#incorporation").attr("href", data.incorporation);
+                            // $("#pan").attr("href", data.pan);
+                            // $("#gst").attr("href", data.gst);
+                            $("#moa").click(function(){   
+								openAttachment(data.moa,"MOA");
+                                return false;
+							});
+							$("#aoa").click(function(){
+								openAttachment(data.aoa,"AOA");	
+                                return false;
+							});
+							$("#incorporation").click(function(){
+								openAttachment(data.incorporation,"Certificate Of Incorporation");	
+                                return false;
+							});
+							$("#pan").click(function(){
+								openAttachment(data.pan,"PAN");	
+                                return false;
+							});
+							$("#gst").click(function(){
+								openAttachment(data.gst,"GST");
+                                return false;	
+							});
 
                             if(data.userstatus=='SUBMITTED')
                             {
@@ -495,6 +536,35 @@
 
 
             }
+            function openAttachment(attachurl,attachname)
+            {
+                console.log(attachurl);
+                // var extension = attachurl.substring(attachurl.lastIndexOf(".")+1, attachurl.length).toLowerCase();
+                // console.log("extension : "+extension);
+                var url='/api/attachment?attachurl='+attachurl;
+                $.ajax({
+                type: 'GET',
+                dataType:"json",
+                contentType: 'application/json',
+                url: url,
+                success: function (data, status, xhr) {
+                    console.log('data: ', data);
+                    if(data.status=='success')
+                    {     
+                        $("#modal-title").text(attachname);
+                        // console.log(data.attach_base64_string);
+                        var html = '<embed width="100%" height="500px" src="data:application/pdf;base64,'+data.attach_base64_string+'" type="application/pdf" />';
+                        $("#attachment").html(html);
+                        $("#kt_select2_modal").modal("show");
+                    }					
+                },
+                error(){
+                    console.log('Error');
+                }
+                });
+                        
+            }
+            
             $(document).ready(function() {
               console.log( "ready!" );
               var params = (new URL(location)).searchParams;

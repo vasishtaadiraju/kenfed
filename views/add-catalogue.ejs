@@ -240,7 +240,7 @@
                                     <div></div>
                                     <div class="custom-file">
                                      <input type="file" class="custom-file-input" id="pictures" multiple/>
-                                     <label class="custom-file-label" for="customFile">Choose files</label>
+                                     <label id="pictures-name" class="custom-file-label" for="customFile">Choose files</label>
                                     </div>
                                    </div>
                                    <div class="form-group">
@@ -248,7 +248,7 @@
                                     <div></div>
                                     <div class="custom-file">
                                      <input type="file" class="custom-file-input" id="brochure"/>
-                                     <label class="custom-file-label" for="customFile">Choose file</label>
+                                     <label  id="brochure-name" class="custom-file-label" for="customFile">Choose file</label>
                                     </div>
                                    </div>
                                  </div>
@@ -459,9 +459,27 @@
 							$("#userid").val(id);
 							console.log($("#userid").val());
 							$("#profile").attr("href","/profile?id="+id);
-							$("#catalogue").attr("href","/view-catalogue?id="+id);
-							getSurnames();          	
-						}
+							$("#catalogue").attr("href","/view-catalogue?id="+id);	
+                            $("#pictures").change(function(){
+                                var pictures_name="";
+                                for(var i=0;i<this.files.length;i++)
+                                {
+                                    if(i==this.files.length-1)
+                                    {
+                                        pictures_name+=this.files[i].name;
+                                    }
+                                    else
+                                    {
+                                        pictures_name+=this.files[i].name+", ";
+                                    }
+                                    
+                                }
+                                $("#pictures-name").text(pictures_name);
+                            });
+                            $("#brochure").change(function(){                               
+                                $("#brochure-name").text(this.files[0].name);
+                            });							
+                        }
 						else if(data.userstatus=='REGISTERED')
 						{
 							location.replace("/submit-profile?id="+id);
